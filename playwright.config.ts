@@ -34,6 +34,7 @@ export default defineConfig({
 
   /* Configure projects for major browsers */
   projects: [
+    /*
     {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
@@ -48,6 +49,15 @@ export default defineConfig({
       name: 'webkit',
       use: { ...devices['Desktop Safari'] },
     },
+  */
+    {
+      name: 'chrome',
+      use: {
+        channel: 'chrome',
+        headless: false,
+        viewport: { width: 1600, height: 900 }
+      }
+    }
 
     /* Test against mobile viewports. */
     // {

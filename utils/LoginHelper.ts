@@ -1,0 +1,10 @@
+import { Page } from '@playwright/test';
+import { LoginPage } from '../pages/LoginPage';
+
+export async function loginAsStandardUser(page: Page): Promise<void> {
+  const loginPage = new LoginPage(page);
+
+  await loginPage.navigate();
+
+  await loginPage.login('standard_user', 'secret_sauce');
+}

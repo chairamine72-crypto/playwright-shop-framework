@@ -7,9 +7,6 @@ import { InventoryPage } from '../pages/InventoryPage';
 import { products } from '../test-data/products';
 
 test.describe('Inventory Page Tests', () => {
- 
-  });
-
   test('Verify inventory page loaded', async ({ inventoryPage }) => {
     await inventoryPage.verifyPageLoaded();
 

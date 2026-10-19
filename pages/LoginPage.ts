@@ -1,30 +1,33 @@
-import { Page, Locator } from '@playwright/test';
+import { Page, Locator, expect } from '@playwright/test';
 
 export class LoginPage {
+  readonly page: Page;
+  readonly username: Locator;
+  readonly password: Locator;
+  readonly loginButton: Locator;
+  readonly errorMessage: Locator;
 
-    readonly page: Page;
-    readonly username: Locator;
-    readonly password: Locator;
-    readonly loginButton: Locator;
+  constructor(page: Page) {
+    this.page = page;
 
-    constructor(page: Page) {
+    this.username = page.locator('#user-name');
+    this.password = page.locator('#password');
+    this.loginButton = page.locator('#login-button');
+    this.errorMessage = page.locator('[data-test="error"]');
+  }
 
-        this.page = page;
+  async navigate() {
+    await this.page.goto('https://www.saucedemo.com');
+  }
 
-        this.username = page.locator('#user-name');
-        this.password = page.locator('#password');
-        this.loginButton = page.locator('#login-button');
-    }
+  async login(user: string, pwd: string) {
+    await this.username.fill(user);
+    await this.password.fill(pwd);
 
-    async navigate() {
-        await this.page.goto('https://www.saucedemo.com');
-    }
+    await this.loginButton.click();
+  }
 
-    async login(user: string, pwd: string) {
-
-        await this.username.fill(user);
-        await this.password.fill(pwd);
-
-        await this.loginButton.click();
-    }
+  async verifyErrorMessage(expectedMessage: string) {
+    await expect(this.errorMessage).toContainText(expectedMessage);
+  }
 }

@@ -14,6 +14,8 @@ export class InventoryPage {
 
   readonly removeButtons: Locator;
 
+  readonly shoppingCartLink: Locator;
+
   constructor(page: Page) {
     this.page = page;
 
@@ -27,6 +29,8 @@ export class InventoryPage {
     this.cartBadge = page.locator('.shopping_cart_badge');
 
     this.removeButtons = page.locator('[data-test^="remove"]');
+
+    this.shoppingCartLink = page.locator('.shopping_cart_link');
   }
 
   async verifyPageLoaded() {
@@ -69,5 +73,9 @@ export class InventoryPage {
 
   async verifyCartCount(expectedCount: string) {
     await expect(this.cartBadge).toHaveText(expectedCount);
+  }
+
+  async openCart() {
+    await this.shoppingCartLink.click();
   }
 }

@@ -55,8 +55,9 @@ export default defineConfig({
       name: 'chrome',
       use: {
         channel: 'chrome',
-        headless: false,
-        viewport: { width: 1600, height: 900 },
+        headless: !!process.env.CI,
+        screenshot: 'only-on-failure',
+        trace: 'retain-on-failure',
       },
     },
 

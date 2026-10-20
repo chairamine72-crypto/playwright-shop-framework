@@ -5,6 +5,8 @@ import { CartPage } from '../pages/CartPage';
 import { CheckoutPage } from '../pages/CheckoutPage';
 import { CheckoutOverviewPage } from '../pages/CheckoutOverviewPage';
 import { CheckoutCompletePage } from '../pages/CheckoutCompletePage';
+import { ProductApiClient } from '../api/clients/ProductApiClient';
+import { AuthApiClient } from '../api/clients/AuthApiClient';
 
 type MyFixtures = {
   inventoryPage: InventoryPage;
@@ -13,6 +15,9 @@ type MyFixtures = {
   checkoutPage: CheckoutPage;
   checkoutOverviewPage: CheckoutOverviewPage;
   checkoutCompletePage: CheckoutCompletePage;
+
+  productApiClient: ProductApiClient;
+  AuthApiClient: AuthApiClient;
 };
 
 export const test = base.extend<MyFixtures>({
@@ -44,6 +49,14 @@ export const test = base.extend<MyFixtures>({
 
   checkoutPage: async ({ page }, use) => {
     await use(new CheckoutPage(page));
+  },
+
+  productApiClient: async ({ request }, use) => {
+    await use(new ProductApiClient(request));
+  },
+
+  AuthApiClient: async ({ request }, use) => {
+    await use(new AuthApiClient(request));
   },
 });
 

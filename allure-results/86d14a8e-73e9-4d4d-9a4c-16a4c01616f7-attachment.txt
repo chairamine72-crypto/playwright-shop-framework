@@ -1,0 +1,20 @@
+
+========== API REQUEST ==========
+Method: POST
+URL: https://dummyjson.com/products/add
+Payload: {
+  "title": "Playwright Product",
+  "price": 99
+}
+===============================
+
+
+========== API RESPONSE ==========
+Status: 201
+Body: {
+  "id": 195,
+  "title": "Playwright Product",
+  "price": 99
+}
+================================
+

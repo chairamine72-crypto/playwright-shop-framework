@@ -1,5 +1,0 @@
-{
-  username: 'wrong_user',
-  password: 'wrong_password',
-  expectedError: 'Username and password do not match'
-}

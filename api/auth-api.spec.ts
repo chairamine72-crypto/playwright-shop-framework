@@ -1,13 +1,25 @@
 import { test, expect } from '../fixtures/test-fixtures';
-import { AuthApiClient } from './clients/AuthApiClient';
 import { LoginResponse } from './models/LoginResponse';
+import * as allure from 'allure-js-commons';
 
 test('Verify login returns token', async ({ AuthApiClient }) => {
-  const response = await AuthApiClient.login('emilys', 'emilyspass');
+  let response;
 
-  expect(response.ok()).toBeTruthy();
+  await allure.step('Send login request', async () => {
+    response = await AuthApiClient.login('emilys', 'emilyspass');
+  });
 
-  const loginResponse: LoginResponse = await response.json();
+  await allure.step('Verify successful response', async () => {
+    expect(response!.ok()).toBeTruthy();
+  });
 
-  expect(loginResponse.accessToken).toBeDefined();
+  const loginResponse: LoginResponse = await response!.json();
+
+  await allure.step('Verify access token exists', async () => {
+    expect(loginResponse.accessToken).toBeDefined();
+  });
+
+  await allure.step('Verify refresh token exists', async () => {
+    expect(loginResponse.refreshToken).toBeDefined();
+  });
 });

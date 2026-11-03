@@ -6,6 +6,7 @@ test.describe('Login Data Driven Tests', () => {
     test(`Verify login validation: ${data.expectedError}`, async ({ loginPage }) => {
       await loginPage.navigate();
 
+      console.log(data);
       await loginPage.login(data.username, data.password);
 
       await loginPage.verifyErrorMessage(data.expectedError);

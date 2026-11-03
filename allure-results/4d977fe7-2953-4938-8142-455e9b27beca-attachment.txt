@@ -1,0 +1,1 @@
+{ username: '', password: '', expectedError: 'Username is required' }

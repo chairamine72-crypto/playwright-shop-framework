@@ -21,6 +21,20 @@ test.describe('Checkout E2E Tests', () => {
       await cartPage.clickCheckout();
     });
 
+    await allure.attachment(
+      'Customer Data',
+      JSON.stringify(
+        {
+          firstName: 'Amin',
+          lastName: 'Chair',
+          postalCode: '41836',
+        },
+        null,
+        2,
+      ),
+      'application/json',
+    );
+
     await allure.step('Checkout page enter information', async () => {
       await checkoutPage.enterCheckoutInformation('Amin', 'Chair', '41836');
     });
@@ -48,5 +62,9 @@ test.describe('Checkout E2E Tests', () => {
     await allure.step('Checkout complete page ', async () => {
       await checkoutCompletePage.verifyOrderCompleted();
     });
+
+    const screenshot = await checkoutCompletePage.page.screenshot();
+
+    await allure.attachment('Order Confirmation', screenshot, 'image/png');
   });
 });
